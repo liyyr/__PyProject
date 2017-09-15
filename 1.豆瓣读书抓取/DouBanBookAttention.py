@@ -3,6 +3,7 @@
 
 import requests
 import re
+import pandas
 from bs4 import BeautifulSoup
 
 res = requests.get('https://book.douban.com/chart?subcat=I')
@@ -19,6 +20,7 @@ for book in soup.select('.media'):
 	#部分书籍作者存在多个，数组长度不一致，对多用户数组，需特殊处理
 	if len(bookInfo)>5:
 		for bookAuthor in bookInfo[:-4]:
+			bookAuthor += bookAuthor
 	else:
 		bookAuthor = bookInfo[:-4][0].strip()
 	#以上代码，均为判断
