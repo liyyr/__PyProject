@@ -7,13 +7,11 @@ from datetime import datetime
 def sendMail():
     pass
 
-
 def getErrorService():
     targetFile = getTargetFile()
     f = open(targetFile, mode="r", encoding='UTF-16LE')
     lines = f.readlines()
     return re.findall('\|(.*)\|',lines[-4])[0]
-
 
 def getErrorMessage():
     pass
@@ -33,6 +31,7 @@ def getTargetFile():
 
 if __name__ == '__main__':
     getErrorService()
-    #rint(getTargetFile())
+    #print(getTargetFile())
+    #print(getErrorService())
     
     
