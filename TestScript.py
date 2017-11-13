@@ -9,20 +9,20 @@ from email.header import Header
 from datetime import datetime
 
 
-def sendMail():
+def sendMail(serviceName):
     # 第三方 SMTP 服务
     mail_host="smtp.ym.163.com"  #设置服务器
-    mail_user="liyyr@eastfantasy.com"    #用户名
-    mail_pass="justsmall4"   #口令 
+    mail_user="god@eastfantasy.com"    #用户名
+    mail_pass="eastfantasy.com"   #口令 
      
-    sender = 'liyyr@eastfantasy.com'
-    receivers = ['20507354@qq.com']  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
+    sender = 'god@eastfantasy.com'
+    receivers = ['liyyr@eastfantasy.com']  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
      
-    message = MIMEText('Python 邮件发送测试...', 'plain', 'utf-8')
-    message['From'] = Header("liyyr", 'utf-8')
-    message['To'] =  Header("测试", 'utf-8')
+    message = MIMEText('测试服的 %s 服务端出现故障,请立即检查' % serviceName, 'plain', 'utf-8')
+    message['From'] = Header("报警监控", 'utf-8')
+    message['To'] =  Header("全体成员", 'utf-8')
      
-    subject = 'Python SMTP 邮件测试2'
+    subject = '测试服的 %s 服务端出现故障啦!' % serviceName
     message['Subject'] = Header(subject, 'utf-8')
       
     try:
@@ -38,14 +38,7 @@ def getErrorService():
     targetFile = getTargetFile()
     f = open(targetFile, mode="r", encoding='UTF-16LE')
     lines = f.readlines()
-    index = -1
-    while(index != 0):      #while循环，从文本最后一行开始遍历，直至查询到的第一个符合要求内容，停止查询退出，返回结果
-        try:
-            ErrorServiceName = re.findall('\|(.*)\|',lines[index])[0]
-            index = 0
-        except:
-            index -= 1
-    return ErrorServiceName
+    return re.findall('\|(.*)\|',lines[-4])[0]
 
 def getErrorMessage():
     pass
@@ -64,8 +57,8 @@ def getTargetFile():
 
 
 if __name__ == '__main__':
-    getErrorService()
-    sendMail()
+    name = getErrorService()
+    sendMail(name)
     #print(getTargetFile())
     #print(getErrorService())
     
