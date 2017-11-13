@@ -5,18 +5,25 @@ import requests
 # r = requests.post(url, data=d)
 # print(r.text)
 
-url = "https://www.talkingdata.com/game/v1/incomeData/partnerIncomeDistribution"
-form = {"developerID":"2027432",
-		"displayCurrency":"CNY",
-		"displayDateTip":"-7",
-		"endTime":"170922",
-		"gameserverID":"",
-		"partnerID":"",
-		"platformID":"",
-		"productID":"41391",
-		"productRegistTime":"2016-08-01",
-		"startTime":"170915"}
 
-r = requests.post(url, data=form)
+url = 'https://www.talkingdata.com/game/v1/select/fetchSelectPartner'
+d ={"action":"save"
+,"url":"https%3A%2F%2Fwww.talkingdata.com%2Fgame%2Fpages%2Fmain.jsp%23page%2Frevenue-incomeData%2FZGlzcGxheURhdGVUaXA9LTcmcHJvZHVjdElEPTQxMzkxJnBsYXRmb3JtSUQ9JnBhcnRuZXJJRD0mZ2FtZXNlcnZlcklEPSZkZXZlbG9wZXJJRD0yMDI3NDMyJnByb2R1Y3RSZWdpc3RUaW1lPTIwMTYtMDgtMDEmc3RhcnRUaW1lPTE3MDkwNiZlbmRUaW1lPTE3MDkxMyZkaXNwbGF5Q3VycmVuY3k9Q05Z"
+,"siteid":"kf_9488"
+,"uid":"kf_9488_ISME9754_renwang%40dashenquan.com"
+,"uname":"renwang%40dashenquan.com"
+,"device":"PC"
+,"isvip":"0"
+,"userlevel":"0"
+,"cid":"guestC8064A87-95C8-9319-9819-AAC398AC65EE"
+,"sid":"1505282706313427"
+,"log":"0"
+,"pageid":"1505284184201"
+,"etype":"pv"
+,"edata":""
+,"sellerid":""
+,"ttl":"Talking+Game"}
+
+r = requests.post(url, data=d)
 print(r.text)
 # print(d['device'])

@@ -1,72 +1,17 @@
-#!/usr/bin/python
-# -*- coding: UTF-8 -*-
-
-
-import re
-import smtplib
 from email.mime.text import MIMEText
-from email.header import Header
-from datetime import datetime
+msg = MIMEText('hello too, send by Python...', 'plain', 'utf-8')
 
+# 输入Email地址和口令:
+from_addr = 'liyyr@eastfantasy.com'
+password = 'justsmall4'
+# 输入收件人地址:
+to_addr = ['20507354@qq.com','developer@eastfantasy.com']
+# 输入SMTP服务器地址:
+smtp_server = 'smtp.ym.163.com'
 
-def sendMail():
-    # 第三方 SMTP 服务
-    mail_host="smtp.ym.163.com"  #设置服务器
-    mail_user="liyyr@eastfantasy.com"    #用户名
-    mail_pass="justsmall4"   #口令 
-     
-    sender = 'liyyr@eastfantasy.com'
-    receivers = ['20507354@qq.com']  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
-     
-    message = MIMEText('Python 邮件发送测试...', 'plain', 'utf-8')
-    message['From'] = Header("liyyr", 'utf-8')
-    message['To'] =  Header("测试", 'utf-8')
-     
-    subject = 'Python SMTP 邮件测试2'
-    message['Subject'] = Header(subject, 'utf-8')
-      
-    try:
-        smtpObj = smtplib.SMTP() 
-        smtpObj.connect(mail_host, 25)    # 25 为 SMTP 端口号
-        smtpObj.login(mail_user,mail_pass)  
-        smtpObj.sendmail(sender, receivers, message.as_string())
-        #print("邮件发送成功")
-    except smtplib.SMTPException:
-        print("Error: 无法发送邮件")
-
-def getErrorService():
-    targetFile = getTargetFile()
-    f = open(targetFile, mode="r", encoding='UTF-16LE')
-    lines = f.readlines()
-    index = -1
-    while(index != 0):      #while循环，从文本最后一行开始遍历，直至查询到的第一个符合要求内容，停止查询退出，返回结果
-        try:
-            ErrorServiceName = re.findall('\|(.*)\|',lines[index])[0]
-            index = 0
-        except:
-            index -= 1
-    return ErrorServiceName
-
-def getErrorMessage():
-    pass
-
-def getDate():
-    now = datetime.now()
-    r = str(now)
-    return r.split()[0]
-
-def getTargetFile():
-    strDatePath1 = getDate()
-    strDatePath2 = str(strDatePath1.split('-')[1]) + str(strDatePath1.split('-')[2])
-    targetFile = ("D:\\EastWW\\server\\log\\%s\\SMidgard_u_x64_%s_0_W.log" % (strDatePath1, strDatePath2))
-    return targetFile
-
-
-
-if __name__ == '__main__':
-    getErrorService()
-    sendMail()
-    #print(getTargetFile())
-    #print(getErrorService())
-    
-    
+import smtplib
+server = smtplib.SMTP(smtp_server, 25) # SMTP协议默认端口是25
+server.set_debuglevel(1)
+server.login(from_addr, password)
+server.sendmail(from_addr, [to_addr], msg.as_string())
+server.quit()

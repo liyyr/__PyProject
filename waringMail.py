@@ -22,7 +22,7 @@ def sendMail(serviceName):
     message['From'] = Header("报警监控", 'utf-8')
     message['To'] =  Header("全体成员", 'utf-8')
      
-    subject = '测试服 %s 服务端出现故障' % serviceName
+    subject = '测试服 %s 服务段出现故障' % serviceName
     message['Subject'] = Header(subject, 'utf-8')
       
     try:

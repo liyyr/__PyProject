@@ -7,7 +7,7 @@ stop = 1
 while(stop):
     a = input("请输入a的数值：")
     b = input("请输入b的数值：")
-    
+
     if int(a)<int(b):
         print(a,b)
     elif int(a)>int(b):
